@@ -79,10 +79,7 @@ def connect_and_send():
             irc.send(f"JOIN {channel}\n".encode('utf-8'))
             
             send_message(channel, "!play", irc)
-            print(f"✅ Mensagem '!play' enviada para {channel}")
-            
-            # Intervalo para o mesmo canal
-            time.sleep(random.randint(tempominimo, tempomaximo))  # Intervalo para a próxima mensagem
+            print(f"✅ Mensagem '!play' enviada para {channel}")                     
             
             # Desconecta após enviar a mensagem
             irc.send("PART {}\n".encode('utf-8'))
@@ -110,7 +107,7 @@ def connect_and_send():
 
     # Enviar mensagens para todos os streamers
     for i, streamer in enumerate(streamers):
-    # Ignora o streamer 'gripsed'
+        # Ignora o streamer 'gripsed'
         if streamer.lower() == 'gripsed':
             print(f"❌ Ignorando o streamer {streamer}...")
             continue  # Pula para o próximo streamer
@@ -130,5 +127,8 @@ def connect_and_send():
     
     print("✅ Script em execução. Continuando o loop...")
 
-# Executa a função de envio
-connect_and_send()
+# Adiciona um loop para continuar rodando o script indefinidamente
+while True:
+    connect_and_send()
+    print("🔄 Reiniciando o processo...")
+    time.sleep(random.randint(tempominimo, tempomaximo))  # Intervalo para a próxima mensagem  # Espera 60 segundos antes de reiniciar, você pode ajustar o tempo conforme necessário
